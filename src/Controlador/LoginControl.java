@@ -37,7 +37,7 @@ public class LoginControl {
             {
                 mensaje = "Bienvenido al sistema";
                 PrincipalVista ventana = new PrincipalVista();
-                ventana.visible(true);
+                ventana.setVisible(true);
             }
             else
             {

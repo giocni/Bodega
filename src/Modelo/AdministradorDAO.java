@@ -29,7 +29,7 @@ public class AdministradorDAO {
             //Realizo la consulta SQL
             String sql = "SELECT Iden_Admi,Pass_Admi,Nomb_Admi,Apel_Admi "
                  + "FROM administrador "
-                 + "WHERE Iden_Admi = '"+ admin.getIden_Admi() +"' AND Pass_Admi = '"+ admin.getPass_Admi() +"';";
+                 + "WHERE Iden_Admi = '"+ adm.getIden_Admi() +"' AND Pass_Admi = '"+ adm.getPass_Admi() +"';";
             
             //Me conecto a la base de datos y ejecuto la consulta SQL
             Statement s = con.getConexion().createStatement();
