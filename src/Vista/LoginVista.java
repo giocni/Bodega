@@ -105,8 +105,8 @@ public class LoginVista extends javax.swing.JFrame {
         //Le envio al modelo por medio de los metodos set los datos ingresados
         admi.setIden_Admi(txtUsuario.getText());
         admi.setPass_Admi(txtpassword.getText());
-       
-        //JOptionPane.showMessageDialog(null,login.iniciarSesion(admi));
+        
+        JOptionPane.showMessageDialog(null,login.iniciarSesion(admi));
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**

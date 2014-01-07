@@ -4,6 +4,7 @@ package Controlador;
 import Conexion.Conexion;
 import Modelo.Administrador;
 import Modelo.AdministradorDAO;
+import Vista.PrincipalVista;
 import java.sql.SQLException;
 
 public class LoginControl {
@@ -21,27 +22,33 @@ public class LoginControl {
         {
             return "El campo 'Contraseña' está vacio, por favor verifique el dato.";
         }
-        con = new Conexion();
-        admiDAO = new AdministradorDAO(con);
+        
+         //Creo el objeto de la clase conexión y el modelo administradorDAO
+         con = new Conexion();
+         admiDAO = new AdministradorDAO(con);
+            
         try
         {
             con.Conectar();
-            int mensaje;
+            String mensaje;
             
+            //Ejecuto el metodo del modelo y verifico que no tenga valor null
             if(admiDAO.iniciarSesion(admi) != null)
             {
-                mensaje = 1;
+                mensaje = "Bienvenido al sistema";
+                PrincipalVista ventana = new PrincipalVista();
+                ventana.visible(true);
             }
             else
             {
-                mensaje = 0;
+                mensaje = "Lo sentimos, el usuarios no está registrador en la base de datos";
             }
             con.Desconectar();
             return mensaje;
-            }catch(SQLException | ClassNotFoundException ex)
-            {
-                return ex.getMessage();
-            }
+        }catch(SQLException | ClassNotFoundException ex)
+        {
+            return ex.getMessage();
+        }
     }
     
     private boolean campoVacio(String cadena)
