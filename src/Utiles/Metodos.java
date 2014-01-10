@@ -67,4 +67,16 @@ public class Metodos {
         }
        return estado;
     }
+    
+    private boolean campo_vacio(String cadena,String campo)
+    {
+        cadena = cadena.trim();
+        if(cadena.compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null,"El campo '"+campo+"' se encuentra vacio, por favor ingrese un valor en dicho campo.",
+                                          "Error",JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        return false;
+    }
 }

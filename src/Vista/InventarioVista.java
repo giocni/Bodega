@@ -1,6 +1,5 @@
 package Vista;
 
-import javax.swing.JOptionPane;
 
 public class InventarioVista extends javax.swing.JFrame {
 
@@ -10,17 +9,7 @@ public class InventarioVista extends javax.swing.JFrame {
     }
 
     
-    private boolean campo_vacio(String cadena,String campo)
-    {
-        cadena = cadena.trim();
-        if(cadena.compareTo("") == 0)
-        {
-            JOptionPane.showMessageDialog(null,"El campo '"+campo+"' se encuentra vacio, por favor ingrese un valor en dicho campo.",
-                                          "Error",JOptionPane.ERROR_MESSAGE);
-            return true;
-        }
-        return false;
-    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -172,9 +161,7 @@ public class InventarioVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(!campo_vacio(txtNume_Inve.getText(), "Número / Código"))
-        {
-        }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     
