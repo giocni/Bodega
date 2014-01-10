@@ -22,7 +22,7 @@ public class Metodos {
                 }
                 else
                 {
-                    if(((int)e.getKeyChar() != KeyEvent.VK_SPACE) && ((int)e.getKeyChar() != 44) && 
+                    if(((int)e.getKeyChar() != 20) && ((int)e.getKeyChar() != 44) && 
                             (((int)e.getKeyChar() < 48) || ((int)e.getKeyChar() > 57)))
                     {
                        e.consume();
@@ -68,13 +68,14 @@ public class Metodos {
        return estado;
     }
     
-    private boolean campo_vacio(String cadena,String campo)
+    public boolean campo_vacio(JTextField txt,String campo)
     {
-        cadena = cadena.trim();
+        String cadena = txt.getText().trim();
         if(cadena.compareTo("") == 0)
         {
             JOptionPane.showMessageDialog(null,"El campo '"+campo+"' se encuentra vacio, por favor ingrese un valor en dicho campo.",
                                           "Error",JOptionPane.ERROR_MESSAGE);
+            txt.requestFocus();
             return true;
         }
         return false;
