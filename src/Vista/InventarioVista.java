@@ -1,6 +1,10 @@
 package Vista;
 
+import Controlador.InventarioControl;
+import Modelo.Inventario;
 import Utiles.Metodos;
+import Utiles.modelJTInventario;
+import java.awt.event.KeyEvent;
 
 
 public class InventarioVista extends javax.swing.JFrame {
@@ -13,10 +17,13 @@ public class InventarioVista extends javax.swing.JFrame {
         met.Limite_Caracteres(txtNomb_Inve, 30);
         met.Limite_Caracteres(txtCant_Inve, 20);
         met.Solo_Numeros(txtCant_Inve);
+        
+        cargar_tabla();
     }
 
     Metodos met;
-    
+    InventarioControl invCon;
+    modelJTInventario modelInv;
     
     private void limpiar()
     {
@@ -24,6 +31,15 @@ public class InventarioVista extends javax.swing.JFrame {
         txtDesc_Inve.setText(null);
         txtNomb_Inve.setText(null);
         txtNume_Inve.setText(null);
+        txtNume_Inve.requestFocus();
+    }
+    
+    private void cargar_tabla()
+    {
+        modelInv = new modelJTInventario();
+        invCon = new InventarioControl();
+        modelInv.setLstDatos(invCon.listaInventario());
+        tablaInve.setModel(modelInv);
     }
     
     @SuppressWarnings("unchecked")
@@ -31,7 +47,7 @@ public class InventarioVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaInve = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtNume_Inve = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -54,7 +70,7 @@ public class InventarioVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,10 +78,35 @@ public class InventarioVista extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Número / Código", "Nombre del producto", "Descripción", "Cantidad"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaInve);
+        if (tablaInve.getColumnModel().getColumnCount() > 0) {
+            tablaInve.getColumnModel().getColumn(0).setMinWidth(100);
+            tablaInve.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tablaInve.getColumnModel().getColumn(1).setMinWidth(120);
+            tablaInve.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tablaInve.getColumnModel().getColumn(2).setMinWidth(210);
+            tablaInve.getColumnModel().getColumn(2).setPreferredWidth(210);
+            tablaInve.getColumnModel().getColumn(3).setMinWidth(80);
+            tablaInve.getColumnModel().getColumn(3).setPreferredWidth(80);
+        }
 
         txtNume_Inve.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
 
@@ -76,6 +117,11 @@ public class InventarioVista extends javax.swing.JFrame {
         txtDesc_Inve.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         txtDesc_Inve.setLineWrap(true);
         txtDesc_Inve.setRows(5);
+        txtDesc_Inve.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDesc_InveKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDesc_Inve);
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
@@ -251,7 +297,18 @@ public class InventarioVista extends javax.swing.JFrame {
             {
                 if(!met.campo_vacio(txtCant_Inve,"Cantidad"))
                 {
+                    Inventario inv = new Inventario();
+                    invCon = new InventarioControl();
                     
+                    inv.setNume_Inve(txtNume_Inve.getText().trim());
+                    inv.setNomb_Inve(txtNomb_Inve.getText().trim());
+                    inv.setDesc_Inve(txtDesc_Inve.getText().trim());
+                    inv.setCant_Inve(Long.parseLong(txtCant_Inve.getText().trim()));
+                    if(invCon.Registrar(inv))
+                    {
+                        limpiar();
+                        cargar_tabla();
+                    }
                 }
             }
         }
@@ -260,6 +317,15 @@ public class InventarioVista extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtDesc_InveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDesc_InveKeyTyped
+        int num =250 - txtDesc_Inve.getText().trim().length();
+        lblCaracteres.setText(String.valueOf(num));
+        if(num <= 0)
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDesc_InveKeyTyped
 
     
     public static void main(String args[]) {
@@ -310,8 +376,8 @@ public class InventarioVista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCaracteres;
+    private javax.swing.JTable tablaInve;
     private javax.swing.JTextField txtCant_Inve;
     private javax.swing.JTextArea txtDesc_Inve;
     private javax.swing.JTextField txtNomb_Inve;

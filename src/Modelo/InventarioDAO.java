@@ -1,8 +1,11 @@
 package Modelo;
 
 import Conexion.Conexion;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class InventarioDAO {
     
@@ -13,8 +16,31 @@ public class InventarioDAO {
         this.con = con;
     }
     
+    public boolean Registrar(Inventario inv) throws SQLException
+    {
+        String sql = "INSERT INTO inventario VALUES ("
+                + "'" + inv.getNume_Inve() + "',"
+                + "'" + inv.getNomb_Inve() + "',"
+                + "'" + inv.getDesc_Inve() + "',"
+                + "'" + inv.getCant_Inve() + "');";
+        
+        PreparedStatement pst = con.getConexion().prepareStatement(sql);
+        return pst.executeUpdate() > 0;
+    }
     
-    
+    public ArrayList<Inventario> listaInventario() throws SQLException
+    {
+        String sql = "SELECT * FROM inventario;";
+        ArrayList<Inventario> listaInv = new ArrayList();
+        
+        Statement sta = con.getConexion().createStatement();
+        ResultSet resultado = sta.executeQuery(sql); 
+        while(resultado.next())
+        {
+            listaInv.add(Mapear(resultado));
+        }
+        return listaInv;
+    }
     
     private Inventario Mapear(ResultSet rs) throws SQLException
     {
