@@ -42,6 +42,21 @@ public class InventarioDAO {
         return listaInv;
     }
     
+    public Inventario buscar(String cod) throws SQLException
+    {
+        String sql = "SELECT * FROM inventario WHERE nume_inve = '" + cod + "';";
+        Inventario inv = null;
+        
+        Statement sta = con.getConexion().createStatement();
+        ResultSet resultado = sta.executeQuery(sql);
+        
+        while(resultado.next())
+        {
+            inv = Mapear(resultado);
+        }
+        return inv;
+    }
+    
     private Inventario Mapear(ResultSet rs) throws SQLException
     {
         Inventario inve = new Inventario();

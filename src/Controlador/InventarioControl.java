@@ -48,4 +48,20 @@ public class InventarioControl {
         return listaInv;
     }
     
+    public Inventario buscar(String cod)
+    {
+        con = new Conexion();
+        invDAO = new InventarioDAO(con);
+        Inventario inv = null;
+        try {
+            con.Conectar();
+            inv= invDAO.buscar(cod);
+            con.Desconectar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return inv;
+    }
+    
 }
