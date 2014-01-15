@@ -12,7 +12,7 @@ public class InventarioControl {
     InventarioDAO invDAO;
     Conexion con;
     
-    public boolean Registrar(Inventario inv)
+    public boolean registrar(Inventario inv)
     {
         con = new Conexion();
         invDAO = new InventarioDAO(con);
@@ -20,14 +20,14 @@ public class InventarioControl {
         
         try {
             con.Conectar();
-            if(invDAO.Registrar(inv))
+            if(invDAO.registrar(inv))
             {
                 JOptionPane.showMessageDialog(null,"Guardado correctamente","¡ Bien !",JOptionPane.INFORMATION_MESSAGE);
                 resultado = true;
             }
             con.Desconectar();
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null,"El articulo ya se encuentra registrado, verifique el codigo del producto\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"El articulo ya se encuentra registrado, verifique el código del producto\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
         return resultado;
     }
@@ -62,6 +62,63 @@ public class InventarioControl {
         }
         
         return inv;
+    }
+    
+    public boolean eliminar(String cod)
+    {
+        con = new Conexion();
+        invDAO = new InventarioDAO(con);
+        boolean resultado = false;
+        
+        try {
+            con.Conectar();
+            if(invDAO.eliminar(cod))
+            {
+                JOptionPane.showMessageDialog(null,"Eliminado correctamente","¡ Bien !",JOptionPane.INFORMATION_MESSAGE);
+                resultado = true;
+            }
+            con.Desconectar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null,"No se puede completar la operación, intente mas tarde.\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        return resultado;
+        
+    }
+    
+    public boolean modificar(Inventario inv,String cod)
+    {
+        con = new Conexion();
+        invDAO = new InventarioDAO(con);
+        boolean resultado = false;
+        
+        try {
+            con.Conectar();
+            if(invDAO.modificar(inv,cod))
+            {
+                JOptionPane.showMessageDialog(null,"Modificado correctamente","¡ Bien !",JOptionPane.INFORMATION_MESSAGE);
+                resultado = true;
+            }
+            con.Desconectar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null,"El articulo ya se encuentra registrado, verifique el código del producto\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        return resultado;
+    }
+    
+    public ArrayList<Inventario> listaInventario_filtro(String val)
+    {
+        con = new Conexion();
+        invDAO = new InventarioDAO(con);
+        ArrayList<Inventario> listaInv = null;
+        
+        try {
+            con.Conectar();
+            listaInv = invDAO.listaInventario_filtro(val);
+            con.Desconectar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        return listaInv;
     }
     
 }

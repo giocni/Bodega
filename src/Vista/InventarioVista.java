@@ -4,6 +4,7 @@ import Controlador.InventarioControl;
 import Modelo.Inventario;
 import Utiles.Metodos;
 import Utiles.modelJTInventario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -24,7 +25,8 @@ public class InventarioVista extends javax.swing.JFrame {
 
     Metodos met;
     InventarioControl invCon;
-    modelJTInventario modelInv;
+    modelJTInventario modelInv = new modelJTInventario();
+    String codigo;
     
     private void limpiar()
     {
@@ -37,7 +39,6 @@ public class InventarioVista extends javax.swing.JFrame {
     
     private void cargar_tabla()
     {
-        modelInv = new modelJTInventario();
         invCon = new InventarioControl();
         modelInv.setLstDatos(invCon.listaInventario());
         tablaInve.setModel(modelInv);
@@ -118,6 +119,11 @@ public class InventarioVista extends javax.swing.JFrame {
         btnModificar.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         btnModificar.setText("Guardar cambios");
         btnModificar.setEnabled(false);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnRegistrar.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -172,6 +178,11 @@ public class InventarioVista extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaInve.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaInveMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaInve);
         if (tablaInve.getColumnModel().getColumnCount() > 0) {
             tablaInve.getColumnModel().getColumn(0).setMinWidth(100);
@@ -188,6 +199,11 @@ public class InventarioVista extends javax.swing.JFrame {
         jLabel9.setText("Filtro:");
 
         txtFiltro.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyTyped(evt);
+            }
+        });
 
         txtBuscar.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         txtBuscar.setText("Busqueda");
@@ -337,7 +353,7 @@ public class InventarioVista extends javax.swing.JFrame {
                     inv.setNomb_Inve(txtNomb_Inve.getText().trim());
                     inv.setDesc_Inve(txtDesc_Inve.getText().trim());
                     inv.setCant_Inve(Long.parseLong(txtCant_Inve.getText().trim()));
-                    if(invCon.Registrar(inv))
+                    if(invCon.registrar(inv))
                     {
                         limpiar();
                         cargar_tabla();
@@ -355,12 +371,17 @@ public class InventarioVista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtDesc_InveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDesc_InveKeyTyped
-        int num =250 - txtDesc_Inve.getText().trim().length();
-        lblCaracteres.setText(String.valueOf(num));
-        if(num <= 0)
+        try
         {
-            evt.consume();
+            int num =250 - txtDesc_Inve.getText().trim().length();
+            lblCaracteres.setText(String.valueOf(num));
+            if(num <= 0)
+            {
+                evt.consume();
+            }
         }
+        catch(Exception e)
+        {}
     }//GEN-LAST:event_txtDesc_InveKeyTyped
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -394,6 +415,7 @@ public class InventarioVista extends javax.swing.JFrame {
                         btnModificar.setEnabled(true);
                         btnEliminar.setEnabled(true);
                         
+                        codigo = inv.getNume_Inve();
                         ban = false;
                     }
                 }
@@ -407,9 +429,67 @@ public class InventarioVista extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       int op = JOptionPane.showConfirmDialog(null,"Esta seguro de eliminar el articulo '"+"' del sistema ?","Eliminar",JOptionPane.QUESTION_MESSAGE);
-       
+       int op = JOptionPane.showConfirmDialog(null,"Esta seguro de eliminar el articulo '"+codigo+"' del sistema ?","Eliminar",JOptionPane.YES_NO_OPTION);
+       if (op == 0)
+       {
+           invCon = new InventarioControl();
+           if(invCon.eliminar(codigo))
+           {
+               btnCancelarActionPerformed(null);
+               cargar_tabla();
+           }
+       }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if(!met.campo_vacio(txtNume_Inve,"Número / Código"))
+        {
+            if(!met.campo_vacio(txtNomb_Inve,"Nombre del producto"))
+            {
+                if(!met.campo_vacio(txtCant_Inve,"Cantidad"))
+                {
+                    Inventario inv = new Inventario();
+                    invCon = new InventarioControl();
+                    
+                    inv.setNume_Inve(txtNume_Inve.getText().trim());
+                    inv.setNomb_Inve(txtNomb_Inve.getText().trim());
+                    inv.setDesc_Inve(txtDesc_Inve.getText().trim());
+                    inv.setCant_Inve(Long.parseLong(txtCant_Inve.getText().trim()));
+                    if(invCon.modificar(inv,codigo))
+                    {
+                        btnCancelarActionPerformed(null);
+                        cargar_tabla();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void tablaInveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaInveMouseClicked
+
+        Inventario inv = modelInv.getFila(tablaInve.getSelectedRow());
+        
+        txtNume_Inve.setText(inv.getNume_Inve());
+        txtNomb_Inve.setText(inv.getNomb_Inve());
+        txtDesc_Inve.setText(inv.getDesc_Inve());
+        txtCant_Inve.setText(String.valueOf(inv.getCant_Inve()));
+        
+        txtDesc_InveKeyTyped(null);
+        btnRegistrar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        codigo = inv.getNume_Inve();
+    }//GEN-LAST:event_tablaInveMouseClicked
+
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        String val = txtFiltro.getText();
+        invCon = new InventarioControl();
+        modelInv.setLstDatos(invCon.listaInventario_filtro(val));
+        tablaInve.removeAll();
+        tablaInve.setModel(modelInv);
+        
+    }//GEN-LAST:event_txtFiltroKeyTyped
 
     
     public static void main(String args[]) {

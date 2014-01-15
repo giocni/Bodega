@@ -16,7 +16,7 @@ public class InventarioDAO {
         this.con = con;
     }
     
-    public boolean Registrar(Inventario inv) throws SQLException
+    public boolean registrar(Inventario inv) throws SQLException
     {
         String sql = "INSERT INTO inventario VALUES ("
                 + "'" + inv.getNume_Inve() + "',"
@@ -57,6 +57,45 @@ public class InventarioDAO {
         return inv;
     }
     
+    public boolean eliminar(String cod) throws SQLException
+    {
+        String sql = "DELETE FROM inventario WHERE nume_inve = '" + cod + "';";
+        
+        PreparedStatement pst = con.getConexion().prepareStatement(sql);
+        return pst.executeUpdate() > 0;
+    }
+    
+    public boolean modificar(Inventario inv,String cod) throws SQLException
+    {
+        String sql = "UPDATE inventario SET "
+                + "nume_inve = '" + inv.getNume_Inve() + "' , "
+                + "nomb_inve = '" + inv.getNomb_Inve() + "' , "
+                + "desc_inve = '" + inv.getDesc_Inve() + "' , "
+                + "cant_inve = '" + inv.getCant_Inve() + "' "
+                + "WHERE nume_inve = '" + cod + "';";
+        
+        PreparedStatement pst = con.getConexion().prepareStatement(sql);
+        return pst.executeUpdate() > 0;
+    }
+    
+    public ArrayList<Inventario> listaInventario_filtro(String val) throws SQLException
+    {
+        String sql = "SELECT * FROM inventario WHERE "
+                + "nume_inve LIKE '%" + val + "%' OR "
+                + "nomb_inve LIKE '%" + val + "%' OR "
+                + "desc_inve LIKE '%" + val + "%' OR "
+                + "cant_inve LIKE '%" + val + "%';";
+        ArrayList<Inventario> listaInv = new ArrayList();
+        
+        Statement sta = con.getConexion().createStatement();
+        ResultSet resultado = sta.executeQuery(sql); 
+        while(resultado.next())
+        {
+            listaInv.add(Mapear(resultado));
+        }
+        return listaInv;
+    }
+    
     private Inventario Mapear(ResultSet rs) throws SQLException
     {
         Inventario inve = new Inventario();
@@ -68,5 +107,6 @@ public class InventarioDAO {
         
         return inve;
     }
+    
     
 }
