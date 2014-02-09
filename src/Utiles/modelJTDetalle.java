@@ -68,6 +68,7 @@ public class modelJTDetalle extends AbstractTableModel {
     }
     
     //Metodo para dar los valores a cada campo de la tabla
+    @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex)
     {
         Detalle deta = listaDeta.get(rowIndex);

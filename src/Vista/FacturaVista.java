@@ -5,7 +5,9 @@ package Vista;
 import Controlador.DetalleControl;
 import Modelo.Detalle;
 import Utiles.Metodos;
+import Utiles.modelJTCliente;
 import Utiles.modelJTDetalle;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class FacturaVista extends javax.swing.JFrame {
@@ -18,32 +20,17 @@ public class FacturaVista extends javax.swing.JFrame {
         
         //Ubico el formulario en el centro de la pantalla
         setLocationRelativeTo(null);
-        
-        //Carlo la grilla de detalles
-        cargar_tabla();
+ 
     }
     
     //Declaro las variables de las clases
     Metodos met;
     DetalleControl deta;
-    modelJTDetalle modelDeta;
-
+    modelJTDetalle modelDeta = new modelJTDetalle();
+    ArrayList<Detalle> listaDeta = new ArrayList();
+    
     //Metodo para cargar la grilla de detalles
-    private void cargar_tabla()
-    {
-        //Creo el objeto
-        modelDeta = new modelJTDetalle();
-        deta = new DetalleControl();
-        
-        /*
-            Ejecuto el metodo setLsDatos del modelo mdelJTDetalles
-            y le envio como parametro el array de datos listaDtalles
-        */
-        modelDeta.setLsDatos(deta.listaDetalle());
-        
-        //Crago los datos a la grilla
-        TablaDeta.setModel(modelDeta);
-    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -314,6 +301,7 @@ public class FacturaVista extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
         //Verifico que los campos estén vacios
+        met = new Metodos();
         if(!met.campo_vacio(txtArticulo, "Artículo"))
         {
             if(!met.campo_vacio(txtCantidad, "Cantidad"))
@@ -321,9 +309,15 @@ public class FacturaVista extends javax.swing.JFrame {
                 if(!met.campo_vacio(txtValUnitario, "Valor unitario"))
                 {
                     //Creo el objeto del modelo Detalle y controlador DetalleControl
-                    Detalle deta = new Detalle();
-                    modelJTDetalle mode = new modelJTDetalle();
-                    
+                    Detalle detaa = new Detalle();
+                    modelDeta = new modelJTDetalle();
+                    detaa.setNomb_Deta(txtArticulo.getText());
+                    detaa.setDesc_Deta(txtDescripcion.getText());
+                    detaa.setCant_Deta(txtCantidad.getText());
+                    detaa.setValo_Deta(txtValUnitario.getText());
+                    listaDeta.add(detaa);
+                    modelDeta.setLsDatos(listaDeta);
+                    TablaDeta.setModel(modelDeta);
                 }
             }
         }
