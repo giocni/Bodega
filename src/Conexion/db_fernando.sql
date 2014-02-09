@@ -16,25 +16,25 @@ CREATE TABLE `cliente`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `factura`(
-	`Nume_Fact` VARCHAR(25) NOT NULL PRIMARY KEY,
-	`Tota_Fact` VARCHAR(25),
+	`Nume_Fact` INT PRIMARY KEY AUTO_INCREMENT,
+	`Tota_Fact` INT,
 	`Fech_Fact` DATE,
 	`Obse_Fact` VARCHAR(250),
+	`Desc_Fact` INT,
 	`Fech_Even` DATE,
 	`Iden_Admi` VARCHAR(15),
 	`Iden_Clie` VARCHAR(15),
-	`Desc_Fact` INT,
 	FOREIGN KEY (`Iden_Admi`) REFERENCES administrador (`Iden_Admi`),
 	FOREIGN KEY (`Iden_Clie`) REFERENCES cliente (`Iden_Clie`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `detalle`(
-	`Nume_Deta` VARCHAR(25) NOT NULL PRIMARY KEY,
+	`Nume_Deta` INT PRIMARY KEY AUTO_INCREMENT,
 	`Nomb_Deta` VARCHAR(25),
 	`Desc_Deta` VARCHAR(250),
 	`Cant_Deta` INT,
 	`Valo_Deta` INT,
-	`Nume_Fact` VARCHAR(25),
+	`Nume_Fact` INT NOT NULL,
 	FOREIGN KEY (`Nume_Fact`) REFERENCES factura (`Nume_Fact`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -45,5 +45,11 @@ CREATE TABLE `inventario`(
 	`Cant_Inve` INT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `licencia`(
+    `Codi_Lice` VARCHAR(20) NOT NULL PRIMARY KEY,
+    `Esta_Lice` BOOLEAN
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO administrador (Iden_Admi,Nomb_Admi,Apel_Admi,Pass_Admi) VALUES ('20141502','root','Super Usuario','root2014'),
-                                                                           ('770329785','Fernando','Camargo Plata','fernando2014');
+                                                                           ('770329785','Fernando','Camargo Plata','fernando2014'),
+                                                                           ('1065610405','Leonis Rafael','Ocampo Neves','junior1989');
