@@ -7,8 +7,9 @@ public class Detalle {
     private String Nume_Deta;
     private String Nomb_Deta;
     private String Desc_Deta;
-    private String Cant_Deta;
-    private String Valo_Deta;
+    private int Cant_Deta;
+    private int Valo_Deta;
+    private int Valt_Deta;
     private String Nume_Fact;
     
     public String getNume_Deta() {
@@ -35,20 +36,28 @@ public class Detalle {
         this.Desc_Deta = Desc_Deta;
     }
 
-    public String getCant_Deta() {
+    public int getCant_Deta() {
         return Cant_Deta;
     }
 
-    public void setCant_Deta(String Cant_Deta) {
+    public void setCant_Deta(int Cant_Deta) {
         this.Cant_Deta = Cant_Deta;
     }
 
-    public String getValo_Deta() {
+    public int getValo_Deta() {
         return Valo_Deta;
     }
 
-    public void setValo_Deta(String Valo_Deta) {
+    public void setValo_Deta(int Valo_Deta) {
         this.Valo_Deta = Valo_Deta;
+    }
+    
+    public int getValt_Deta() {
+        return Valt_Deta;
+    }
+    
+    public void setValt_Deta(int Valt_Deta) {
+        this.Valt_Deta = Valt_Deta;
     }
     
     public String getNume_Fact() {

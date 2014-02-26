@@ -94,8 +94,8 @@ public class DetalleDAO {
         
         deta.setNomb_Deta(rs.getString("Nomb_Deta"));
         deta.setDesc_Deta(rs.getString("Desc_Deta"));
-        deta.setCant_Deta(rs.getString("Cant_Deta"));
-        deta.setValo_Deta(rs.getString("Valo_Deta"));
+        deta.setCant_Deta(rs.getInt("Cant_Deta"));
+        deta.setValo_Deta(rs.getInt("Valo_Deta"));
         
         //Retorno el valor del objeto
         return deta;

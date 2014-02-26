@@ -125,6 +125,12 @@ public class ClienteVista extends javax.swing.JFrame {
 
         jLabel4.setText("Teléfono:");
 
+        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdentificacionActionPerformed(evt);
+            }
+        });
+
         btnRegistrar.setText("Guardar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,6 +475,10 @@ public class ClienteVista extends javax.swing.JFrame {
             }
         } 
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdentificacionActionPerformed
 
     /**
      * @param args the command line arguments

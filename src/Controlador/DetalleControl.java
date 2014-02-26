@@ -15,7 +15,7 @@ public class DetalleControl {
     Conexion con;
     
     //Metodo para insertar cada detalle de la factura
-    public boolean insertarDetalle(Detalle det)
+    public boolean insertarDetalle(ArrayList<Detalle>lista)
     {
         //Creo los objetos
         con = new Conexion();
@@ -27,15 +27,19 @@ public class DetalleControl {
             //Me conecto a la base de datos
             con.Conectar();
             
+            for(int i = 0; i < lista.size(); i ++)
+            {
+                deta.insertarDetalle(lista.get(i));
+            }
             //Ejecuto el metodo insertar del modelo DetalleDAO y le envio el parametro del metodo
-            if(deta.insertarDetalle(det))
+            /*if(deta.insertarDetalle(det))
             {
                 //Envio mensaje de exito al guardar datos
                 JOptionPane.showMessageDialog(null, "Guardado correctamente");
                 
                 //Retorno TRUE
                 resultado = true;
-            }
+            }*/
         }catch(ClassNotFoundException | SQLException e)
         {
             //Envio mensaje de excepción
@@ -45,7 +49,7 @@ public class DetalleControl {
         //Retorno el valor de la variable resultado
         return resultado;
     }
-    
+   
     //Metodo para listar detalles en la grilla
     public ArrayList<Detalle>listaDetalle()
     {
