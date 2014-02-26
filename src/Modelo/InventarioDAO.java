@@ -6,6 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class InventarioDAO {
     
@@ -94,6 +100,18 @@ public class InventarioDAO {
             listaInv.add(Mapear(resultado));
         }
         return listaInv;
+    }
+    
+    public void Reporte_lista_inventario(String nom_reporte,Conexion con) throws JRException, SQLException
+    {
+        JasperReport reporte;
+        JasperPrint reporte_view;
+        
+        reporte = JasperCompileManager.compileReport(nom_reporte+".jrxml");
+        reporte_view= JasperFillManager.fillReport( reporte, null, con.getConexion() );
+        JasperViewer.viewReport( reporte_view ); 
+        
+        con.Desconectar();
     }
     
     private Inventario Mapear(ResultSet rs) throws SQLException

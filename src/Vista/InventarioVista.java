@@ -4,7 +4,6 @@ import Controlador.InventarioControl;
 import Modelo.Inventario;
 import Utiles.Metodos;
 import Utiles.modelJTInventario;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -25,7 +24,7 @@ public class InventarioVista extends javax.swing.JFrame {
 
     Metodos met;
     InventarioControl invCon;
-    modelJTInventario modelInv = new modelJTInventario();
+    modelJTInventario modelInv;
     String codigo;
     
     private void limpiar()
@@ -40,9 +39,11 @@ public class InventarioVista extends javax.swing.JFrame {
     private void cargar_tabla()
     {
         invCon = new InventarioControl();
+        modelInv = new modelJTInventario();
         modelInv.setLstDatos(invCon.listaInventario());
         tablaInve.setModel(modelInv);
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,6 +73,7 @@ public class InventarioVista extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         txtBuscar = new javax.swing.JButton();
+        txtImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -214,6 +216,14 @@ public class InventarioVista extends javax.swing.JFrame {
             }
         });
 
+        txtImprimir.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        txtImprimir.setText("Imprimir");
+        txtImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -254,12 +264,17 @@ public class InventarioVista extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addComponent(txtNomb_Inve, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtImprimir)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,8 +323,9 @@ public class InventarioVista extends javax.swing.JFrame {
                         .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(lblCaracteres)))
-                .addGap(18, 18, 18)
+                        .addComponent(lblCaracteres))
+                    .addComponent(txtImprimir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -485,11 +501,17 @@ public class InventarioVista extends javax.swing.JFrame {
     private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
         String val = txtFiltro.getText();
         invCon = new InventarioControl();
+        modelInv = new modelJTInventario();
         modelInv.setLstDatos(invCon.listaInventario_filtro(val));
         tablaInve.removeAll();
         tablaInve.setModel(modelInv);
         
     }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void txtImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImprimirActionPerformed
+        invCon = new InventarioControl();
+        invCon.imprimir();
+    }//GEN-LAST:event_txtImprimirActionPerformed
 
     
     public static void main(String args[]) {
@@ -547,6 +569,7 @@ public class InventarioVista extends javax.swing.JFrame {
     private javax.swing.JTextField txtCant_Inve;
     private javax.swing.JTextArea txtDesc_Inve;
     private javax.swing.JTextField txtFiltro;
+    private javax.swing.JButton txtImprimir;
     private javax.swing.JTextField txtNomb_Inve;
     private javax.swing.JTextField txtNume_Inve;
     // End of variables declaration//GEN-END:variables

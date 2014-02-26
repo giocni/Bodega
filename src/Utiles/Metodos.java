@@ -1,11 +1,17 @@
 package Utiles;
 
+import Conexion.Conexion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
 
 public class Metodos {
     
@@ -80,4 +86,5 @@ public class Metodos {
         }
         return false;
     }
+    
 }

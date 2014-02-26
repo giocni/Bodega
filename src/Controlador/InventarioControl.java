@@ -5,7 +5,10 @@ import Modelo.Inventario;
 import Modelo.InventarioDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 public class InventarioControl {
     
@@ -119,6 +122,25 @@ public class InventarioControl {
             JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
         return listaInv;
+    }
+    
+    public boolean imprimir()
+    {
+        con = new Conexion();
+        invDAO = new InventarioDAO(con);
+        boolean ban = true;
+
+        try {
+            con.Conectar();
+            invDAO.Reporte_lista_inventario("Inventario", con);
+            con.Desconectar();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            ban = false;
+        } catch (JRException ex) {
+            Logger.getLogger(InventarioControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ban;
     }
     
 }
