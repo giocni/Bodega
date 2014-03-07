@@ -40,15 +40,18 @@ public class LoginVista extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JToggleButton();
         lblNombreDeUsuario = new javax.swing.JLabel();
         lblPasswordDeUsuario = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
         txtpassword = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblNombreDeUsuario1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
         setName("frmLogin"); // NOI18N
 
+        txtUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         btnIniciarSesion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnIniciarSesion.setText("Iniciar Sesión");
+        btnIniciarSesion.setText("Entrar");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSesionActionPerformed(evt);
@@ -56,52 +59,57 @@ public class LoginVista extends javax.swing.JFrame {
         });
 
         lblNombreDeUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        lblNombreDeUsuario.setText("Número de identificación");
+        lblNombreDeUsuario.setText("Usuario:");
 
         lblPasswordDeUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        lblPasswordDeUsuario.setText("Contraseña de usuario");
+        lblPasswordDeUsuario.setText("Contraseña:");
 
-        btnCancelar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnCancelar.setText("Salir");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
+        txtpassword.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        lblNombreDeUsuario1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        lblNombreDeUsuario1.setText("INICIAR SESIÓN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblNombreDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPasswordDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnIniciarSesion))
-                    .addComponent(txtpassword))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblNombreDeUsuario1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombreDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblPasswordDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(21, 21, 21)
+                .addComponent(lblNombreDeUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNombreDeUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPasswordDeUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIniciarSesion)
-                    .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,16 +134,7 @@ public class LoginVista extends javax.swing.JFrame {
             
             dispose();
         }
-        else
-        {
-            limpiar();
-        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    //Código botón salir
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void limpiar()
     {
@@ -192,9 +191,10 @@ public class LoginVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JToggleButton btnIniciarSesion;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblNombreDeUsuario;
+    private javax.swing.JLabel lblNombreDeUsuario1;
     private javax.swing.JLabel lblPasswordDeUsuario;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JPasswordField txtpassword;

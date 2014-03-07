@@ -162,6 +162,11 @@ public class FacturaVista extends javax.swing.JFrame {
                 "Articulo", "Descripción", "Cantidad", "Valor unitario", "Valor total"
             }
         ));
+        TablaDeta.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                TablaDetaPropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDeta);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -602,6 +607,10 @@ public class FacturaVista extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_txtGuardarActionPerformed
+
+    private void TablaDetaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaDetaPropertyChange
+        JOptionPane.showMessageDialog(null,"jaja");
+    }//GEN-LAST:event_TablaDetaPropertyChange
 
     /**
      * @param args the command line arguments
