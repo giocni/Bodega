@@ -47,7 +47,7 @@ public class LoginVista extends javax.swing.JFrame {
         setTitle("Inicio de Sesión");
         setName("frmLogin"); // NOI18N
 
-        btnIniciarSesion.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        btnIniciarSesion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,13 +55,13 @@ public class LoginVista extends javax.swing.JFrame {
             }
         });
 
-        lblNombreDeUsuario.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        lblNombreDeUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lblNombreDeUsuario.setText("Número de identificación");
 
-        lblPasswordDeUsuario.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        lblPasswordDeUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lblPasswordDeUsuario.setText("Contraseña de usuario");
 
-        btnCancelar.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnCancelar.setText("Salir");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class LoginVista extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnIniciarSesion))
                     .addComponent(txtpassword))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

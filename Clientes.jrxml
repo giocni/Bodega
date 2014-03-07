@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7729deb1-a4cc-4efb-b7e6-d5c85553601e">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="4"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
@@ -15,17 +15,17 @@
 	</style>
 	<queryString>
 		<![CDATA[SELECT
-     inventario.`Nume_Inve` AS inventario_Nume_Inve,
-     inventario.`Nomb_Inve` AS inventario_Nomb_Inve,
-     inventario.`Desc_Inve` AS inventario_Desc_Inve,
-     inventario.`Cant_Inve` AS inventario_Cant_Inve
+     cliente.`Iden_Clie` AS cliente_Iden_Clie,
+     cliente.`Nomb_Clie` AS cliente_Nomb_Clie,
+     cliente.`Apel_Clie` AS cliente_Apel_Clie,
+     cliente.`Tele_Clie` AS cliente_Tele_Clie
 FROM
-     `inventario` inventario]]>
+     `cliente` cliente]]>
 	</queryString>
-	<field name="inventario_Nume_Inve" class="java.lang.String"/>
-	<field name="inventario_Nomb_Inve" class="java.lang.String"/>
-	<field name="inventario_Desc_Inve" class="java.lang.String"/>
-	<field name="inventario_Cant_Inve" class="java.lang.Integer"/>
+	<field name="cliente_Iden_Clie" class="java.lang.String"/>
+	<field name="cliente_Nomb_Clie" class="java.lang.String"/>
+	<field name="cliente_Apel_Clie" class="java.lang.String"/>
+	<field name="cliente_Tele_Clie" class="java.lang.String"/>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
 	</group>
@@ -52,11 +52,11 @@ FROM
 				<text><![CDATA[Centro de eventos y logística]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d695099f-c66b-4303-8150-1270972c3062" style="SubTitle" x="298" y="109" width="230" height="22"/>
+				<reportElement uuid="d695099f-c66b-4303-8150-1270972c3062" style="SubTitle" x="364" y="109" width="123" height="22"/>
 				<textElement>
 					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Lista de articulos del inventario]]></text>
+				<text><![CDATA[Lista de Clientes]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -66,7 +66,7 @@ FROM
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="9f5a2115-b4c3-4a85-bbd7-71f4781fb799" x="1" y="0" width="87" height="20"/>
+				<reportElement uuid="9f5a2115-b4c3-4a85-bbd7-71f4781fb799" x="1" y="0" width="166" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -77,10 +77,10 @@ FROM
 				<textElement textAlignment="Center">
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Número / Código]]></text>
+				<text><![CDATA[Identificación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="944bb43c-277a-4726-96de-151c65044ec1" x="88" y="0" width="133" height="20"/>
+				<reportElement uuid="944bb43c-277a-4726-96de-151c65044ec1" x="167" y="0" width="252" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -91,10 +91,10 @@ FROM
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre]]></text>
+				<text><![CDATA[Nombres]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="92abbc35-b14d-43df-9250-ced1f4531329" x="221" y="0" width="507" height="20"/>
+				<reportElement uuid="92abbc35-b14d-43df-9250-ced1f4531329" x="419" y="0" width="249" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -105,10 +105,10 @@ FROM
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descripción]]></text>
+				<text><![CDATA[Apellidos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2ab56748-a987-4a4e-bc18-3ddf05c93337" x="728" y="0" width="74" height="20"/>
+				<reportElement uuid="2ab56748-a987-4a4e-bc18-3ddf05c93337" x="668" y="0" width="134" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -119,14 +119,14 @@ FROM
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cantidad]]></text>
+				<text><![CDATA[Teléfono]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement uuid="c1c6a18d-c3b9-464e-97f9-5dd0fa69cf58" x="1" y="0" width="87" height="20"/>
+				<reportElement uuid="2492e605-6375-4c48-84a7-598d87c69aa9" x="1" y="0" width="166" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -135,10 +135,10 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{inventario_Nume_Inve}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente_Iden_Clie}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f1fe026e-6c9b-440b-b043-81b9cd55ad95" x="88" y="0" width="133" height="20"/>
+				<reportElement uuid="5f444479-17a0-4b92-b080-d42c5a6c4478" x="167" y="0" width="252" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -147,10 +147,10 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{inventario_Nomb_Inve}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente_Nomb_Clie}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="2f7485b9-35f0-4f9d-8616-69c48ab87022" x="221" y="0" width="507" height="20"/>
+				<reportElement uuid="18b7e823-01a8-4055-9cc0-81360da8c226" x="419" y="0" width="249" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -159,10 +159,10 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{inventario_Desc_Inve}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente_Apel_Clie}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f929cf42-92ec-4242-ab57-2f7ae4ee1a99" x="728" y="0" width="74" height="20"/>
+				<reportElement uuid="63f7680e-0c26-494c-921f-958442c5dd9e" x="668" y="0" width="134" height="20"/>
 				<box topPadding="3" leftPadding="3">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -171,7 +171,7 @@ FROM
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{inventario_Cant_Inve}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente_Tele_Clie}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

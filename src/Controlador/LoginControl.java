@@ -31,7 +31,9 @@ public class LoginControl {
         
         try
         {
+            System.out.println("antes");
             con.Conectar();
+            System.out.println("despues");
             String mensaje;
             
             if(admiDAO.iniciarSesion(admin) != null)

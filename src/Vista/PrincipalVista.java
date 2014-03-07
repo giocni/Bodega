@@ -146,7 +146,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         
         AdministradorVista a = new AdministradorVista();
         a.setVisible(true);
-        a.cargar();
+        //a.cargar();
         
         dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
