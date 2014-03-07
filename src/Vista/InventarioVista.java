@@ -12,6 +12,9 @@ public class InventarioVista extends javax.swing.JFrame {
     
     public InventarioVista() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
         met = new Metodos();
         met.Limite_Caracteres(txtNume_Inve, 25);
         met.Limite_Caracteres(txtNomb_Inve, 30);
@@ -355,30 +358,6 @@ public class InventarioVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(!met.campo_vacio(txtNume_Inve,"Número / Código"))
-        {
-            if(!met.campo_vacio(txtNomb_Inve,"Nombre del producto"))
-            {
-                if(!met.campo_vacio(txtCant_Inve,"Cantidad"))
-                {
-                    Inventario inv = new Inventario();
-                    invCon = new InventarioControl();
-                    
-                    inv.setNume_Inve(txtNume_Inve.getText().trim());
-                    inv.setNomb_Inve(txtNomb_Inve.getText().trim());
-                    inv.setDesc_Inve(txtDesc_Inve.getText().trim());
-                    inv.setCant_Inve(Long.parseLong(txtCant_Inve.getText().trim()));
-                    if(invCon.registrar(inv))
-                    {
-                        limpiar();
-                        cargar_tabla();
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpiar();
         btnRegistrar.setEnabled(true);
@@ -512,6 +491,30 @@ public class InventarioVista extends javax.swing.JFrame {
         invCon = new InventarioControl();
         invCon.imprimir();
     }//GEN-LAST:event_txtImprimirActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if(!met.campo_vacio(txtNume_Inve,"Número / Código"))
+        {
+            if(!met.campo_vacio(txtNomb_Inve,"Nombre del producto"))
+            {
+                if(!met.campo_vacio(txtCant_Inve,"Cantidad"))
+                {
+                    Inventario inv = new Inventario();
+                    invCon = new InventarioControl();
+
+                    inv.setNume_Inve(txtNume_Inve.getText().trim());
+                    inv.setNomb_Inve(txtNomb_Inve.getText().trim());
+                    inv.setDesc_Inve(txtDesc_Inve.getText().trim());
+                    inv.setCant_Inve(Long.parseLong(txtCant_Inve.getText().trim()));
+                    if(invCon.registrar(inv))
+                    {
+                        limpiar();
+                        cargar_tabla();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     
     public static void main(String args[]) {

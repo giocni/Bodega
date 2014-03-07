@@ -2,7 +2,6 @@
 package Conexion;
 
 //Importo las librerias
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class Conexion {
         db = "db_fernando";
         servidor = "jdbc:mysql://localhost/"+ db;
     }
-    
+ 
     //Obtengo el valor de la conexión a la base de datos
     public Connection getConexion()
     {

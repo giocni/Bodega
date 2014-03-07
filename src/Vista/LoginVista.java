@@ -4,18 +4,32 @@ package Vista;
 //Importo las librerias
 import Controlador.LoginControl;
 import Modelo.Administrador;
+import Utiles.Metodos;
 import javax.swing.JOptionPane;
-import javax.swing.JFrame;
+
+//Para la parte gráfica del proyecto
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 public class LoginVista extends javax.swing.JFrame {
     
+    //Variable del tipo LoginControl y Metodod
     LoginControl login;
+    Metodos met;
+   
     
     public LoginVista() {
         initComponents();
+        met = new Metodos();
+        
+        setResizable(false);
+        
+        met.Solo_Numeros(txtUsuario);
+        met.Limite_Caracteres(txtUsuario, 15);
+        met.Limite_Caracteres(txtpassword, 16);
         
         //Ubico el formulario en el centro de la pantalla
         setLocationRelativeTo(null);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -23,21 +37,17 @@ public class LoginVista extends javax.swing.JFrame {
     private void initComponents() {
 
         txtUsuario = new javax.swing.JTextField();
-        txtpassword = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JToggleButton();
         lblNombreDeUsuario = new javax.swing.JLabel();
         lblPasswordDeUsuario = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        txtpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Inicio de Sesión");
         setName("frmLogin"); // NOI18N
 
-        txtpassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpasswordActionPerformed(evt);
-            }
-        });
-
+        btnIniciarSesion.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,11 +55,19 @@ public class LoginVista extends javax.swing.JFrame {
             }
         });
 
+        lblNombreDeUsuario.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         lblNombreDeUsuario.setText("Número de identificación");
 
+        lblPasswordDeUsuario.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         lblPasswordDeUsuario.setText("Contraseña de usuario");
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        btnCancelar.setText("Salir");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,13 +78,13 @@ public class LoginVista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblNombreDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPasswordDeUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtpassword, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(btnIniciarSesion)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIniciarSesion))
+                    .addComponent(txtpassword))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,36 +97,54 @@ public class LoginVista extends javax.swing.JFrame {
                 .addComponent(lblPasswordDeUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciarSesion)
                     .addComponent(btnCancelar))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtpasswordActionPerformed
-
     //Código del boton iniciarSesión
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        
-        //Creo un objeto del controlador LoginControl
+       
         login = new LoginControl();
+        Administrador admin = new Administrador();
         
-        //Creo un objeto del modelo Administrador
-        Administrador admi = new Administrador();
+        admin.setIden_Admi(txtUsuario.getText());
+        admin.setPass_Admi(txtpassword.getText());
+   
+        JOptionPane.showMessageDialog(null,login.iniciarSesion(admin));
         
-        //Le envio al modelo por medio de los metodos set los datos ingresados
-        admi.setIden_Admi(txtUsuario.getText());
-        admi.setPass_Admi(txtpassword.getText());
-        
-        JOptionPane.showMessageDialog(null,login.iniciarSesion(admi));
+        if(login.t == true)
+        {
+            String m = admin.getIden_Admi();
+            AdministradorVista p = new AdministradorVista();
+            p.setIden_Admi(m);
+            
+            dispose();
+        }
+        else
+        {
+            limpiar();
+        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
+    //Código botón salir
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public void limpiar()
+    {
+        txtUsuario.setText("");
+        txtpassword.setText("");
+        
+        txtUsuario.requestFocus();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -139,6 +175,17 @@ public class LoginVista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                //Agrego el tema
+                PrincipalVista.setDefaultLookAndFeelDecorated(true);
+                
+                //Agrego el skin a mi proyecto
+                SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
+                
+                //Agrego el tema a mi proyecto
+                SubstanceLookAndFeel.setCurrentTheme( "org.jvnet.substance.theme.SubstanceSteelBlueTheme");
+                
+                //Visibilidad de la página TRUE
                 new LoginVista().setVisible(true);
             }
         });
@@ -150,6 +197,6 @@ public class LoginVista extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreDeUsuario;
     private javax.swing.JLabel lblPasswordDeUsuario;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtpassword;
+    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

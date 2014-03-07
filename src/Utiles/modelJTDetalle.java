@@ -66,7 +66,7 @@ public class modelJTDetalle extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex,int columnIndex)
     {
-        return false;
+        return true;
     }
     
     //Metodo para dar los valores a cada campo de la tabla

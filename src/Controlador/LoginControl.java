@@ -10,45 +10,55 @@ import java.sql.SQLException;
 public class LoginControl {
 
     AdministradorDAO admiDAO;
+    Administrador a;
     Conexion con;
-    
-    public String iniciarSesion(Administrador admi)
-    {
-        if(!campoVacio(admi.getIden_Admi()))
+    public boolean t = false;
+     
+    public String iniciarSesion(Administrador admin)
+    { 
+        if(!campoVacio(admin.getIden_Admi()))
         {
-            return "El campo 'Usuario' está vacio, por favor verifique el dato.";
+            return "El campo 'Usuario' está vacio, por favor verifique sus datos.";
         }
-        if(!campoVacio(admi.getPass_Admi()))
+         if(!campoVacio(admin.getPass_Admi()))
         {
-            return "El campo 'Contraseña' está vacio, por favor verifique el dato.";
+            return "El campo 'Contraseña' está vacio, por favor verifique sus datos.";
         }
+         
+        con = new Conexion();
+        admiDAO = new AdministradorDAO(con);
+       
         
-         //Creo el objeto de la clase conexión y el modelo administradorDAO
-         con = new Conexion();
-         admiDAO = new AdministradorDAO(con);
-            
         try
         {
             con.Conectar();
             String mensaje;
             
-            //Ejecuto el metodo del modelo y verifico que no tenga valor null
-            if(admiDAO.iniciarSesion(admi) != null)
+            if(admiDAO.iniciarSesion(admin) != null)
             {
                 mensaje = "Bienvenido al sistema";
-                PrincipalVista ventana = new PrincipalVista();
-                ventana.setVisible(true);
+                
+                PrincipalVista p = new PrincipalVista();
+                
+                p.setVisible(true);
+                
+                LoginControl l = new  LoginControl();
+                t = true;
+                
             }
             else
             {
-                mensaje = "Lo sentimos, el usuarios no está registrador en la base de datos";
+                mensaje = "Lo sentimos, los datos no son correctos o usted no está registrado en el sistema.";
             }
+            
             con.Desconectar();
             return mensaje;
+            
         }catch(SQLException | ClassNotFoundException ex)
         {
             return ex.getMessage();
         }
+        
     }
     
     private boolean campoVacio(String cadena)
