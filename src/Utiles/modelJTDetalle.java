@@ -83,13 +83,13 @@ public class modelJTDetalle extends AbstractTableModel {
                 deta.setDesc_Deta((String) value);
                 break;
             case 2:
-                deta.setCant_Deta((int ) value);
+                deta.setCant_Deta((long ) value);
                 break;
             case 3:
-                deta.setValo_Deta((int) value);
+                deta.setValo_Deta((long) value);
                 break;
             case 4:
-                deta.setValt_Deta((int) value);
+                deta.setValt_Deta((long) value);
                 break;
         }
     }

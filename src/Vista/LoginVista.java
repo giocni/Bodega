@@ -185,9 +185,9 @@ public class LoginVista extends javax.swing.JFrame {
                 //Agrego el tema a mi proyecto
                 SubstanceLookAndFeel.setCurrentTheme( "org.jvnet.substance.theme.SubstanceSteelBlueTheme");
                 
-                //SubstanceLookAndFeel.setCurrentWatermark( new SubstanceImageWatermark("../img1.png"));
+                //SubstanceLookAndFeel.setCurrentWatermark( new SubstanceImageWatermark("img1.png"));
                 
-                //SubstanceLookAndFeel.setImageWatermarkOpacity(new Float(0.3));
+                //SubstanceLookAndFeel.setImageWatermarkOpacity(new Float(0.2));
                 
                 //Visibilidad de la página TRUE
                 new LoginVista().setVisible(true);

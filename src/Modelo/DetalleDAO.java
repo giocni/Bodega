@@ -26,7 +26,7 @@ public class DetalleDAO {
     {
         //Realizo la consulta SQL
         String sql = "INSERT INTO detalle (Nomb_Deta,Desc_Deta,Cant_Deta,Valo_Deta,Nume_Fact)"
-                   +  "VALUES ('"+deta.getNomb_Deta()+"','"+deta.getDesc_Deta()+"','"+deta.getCant_Deta()+"','"+deta.getValo_Deta()+"','"+deta.getNume_Fact()+"');";
+                   +  "VALUES ('"+deta.getNomb_Deta()+"','"+deta.getDesc_Deta()+"',"+deta.getCant_Deta()+","+deta.getValo_Deta()+","+deta.getNume_Fact()+");";
         
         //Me conecto a la db y ejecuto la consult SQL
         PreparedStatement pst = con.getConexion().prepareStatement(sql);

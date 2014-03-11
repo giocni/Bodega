@@ -40,10 +40,12 @@ public class DetalleControl {
                 //Retorno TRUE
                 resultado = true;
             }*/
+            resultado = true;
+            con.Desconectar();
         }catch(ClassNotFoundException | SQLException e)
         {
             //Envio mensaje de excepción
-            JOptionPane.showMessageDialog(null,"El articulo ya se ingresó anteriormente, verifica los datos ingresados\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Error inesperado\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
         
         //Retorno el valor de la variable resultado

@@ -22,9 +22,7 @@ CREATE TABLE `factura`(
 	`Obse_Fact` VARCHAR(250),
 	`Desc_Fact` INT,
 	`Fech_Even` DATE,
-	`Iden_Admi` VARCHAR(15),
 	`Iden_Clie` VARCHAR(15),
-	FOREIGN KEY (`Iden_Admi`) REFERENCES administrador (`Iden_Admi`),
 	FOREIGN KEY (`Iden_Clie`) REFERENCES cliente (`Iden_Clie`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
